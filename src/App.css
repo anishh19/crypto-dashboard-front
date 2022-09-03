@@ -15,6 +15,10 @@ a{
   color: white;
 }
 
+#explore{
+  display: none;
+}
+
 #sourceLogo{
   display: block;
   margin-left: auto;
@@ -87,6 +91,7 @@ progress{
 }
 
 #left{
+  visibility: visible;
   display: flex;
   flex-direction: column;
   width: 29vw;
@@ -240,6 +245,7 @@ progress{
     width: 30px;
     height: 30px;
     background-color:#0dcdc0;
+    display: inline;
   }
   
   .tile :focus{
