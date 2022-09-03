@@ -1,6 +1,15 @@
-* {
-  box-sizing: border-box;
+body {
+  width: 100% ;
+  height: 100vh;
 }
+
+
+* {
+    margin: 0;
+    padding:0; 
+    box-sizing: border-box;
+}
+
 
 a{
   color: white;
@@ -65,25 +74,23 @@ progress{
 #left{
   display: flex;
   flex-direction: column;
-  width: 60vh;
+  width: 35vw;
   box-sizing: border-box;
   height: 85vh;
   overflow: auto;
+}
+
+#rank{ width: 15%;  
+
+}
+#symbol{width: 8%;
+ 
+}
+#cryptoName{width: 40%;
+
+}
+#cryptoPrice{width: 30%;
   
-}
-
-#rank{
-  width: 10%;  float: left;
-
-}
-#symbol{width: 10%;
-  float: left;
-}
-#cryptoName{width: 45%;
-  float: left;
-}
-#cryptoPrice{width: 35%;
-  float: left;
 }
 
 
@@ -93,8 +100,9 @@ progress{
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
   padding: 10px;
-  width: 85vh;
+  width: 35vw;
   margin: 10px;
 }
 
@@ -106,7 +114,7 @@ progress{
   overflow: auto; 
   border-color: #1A1536 ;
   border-left: 10px;
-  width: 600px;
+  width: 30vw;
 }
 
 
@@ -126,15 +134,14 @@ progress{
 }
 
 .tile{
-  width: 96%;
+  width: 99%;
   height: 300px;
-  padding: 2px;
-  margin: 10px;
+  display: flex;
+  flex-direction: row;
   margin-top: 2px;
   border: #1A1536 solid 10px;
   border-radius: 10%;
   color: #1A1536;
-  font-size: 2.5rem;
   background-image: linear-gradient(180deg, #0dcdc0, #016861);
   box-sizing: border-box;
   

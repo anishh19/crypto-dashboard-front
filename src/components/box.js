@@ -10,6 +10,8 @@ const url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&orde
 function Box(){
         const [data,setData] = useState();
         const [selectedCoin,setCoinData] = useState({currentCoin: "", coinDescription: "", coinData:{}});
+        
+        
         useEffect(()=>{ 
                 axios.get(`${url}`).then(res => {
                 const stats = res.data.slice(0,50);
