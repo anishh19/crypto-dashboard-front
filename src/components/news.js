@@ -17,7 +17,7 @@ function News() {
         <div className="fixedElement"> Top News</div>
         {articles?.map((each)=> 
         <div key={each.link} className="newsTile">
-        <img width="100%" height= "200px" src={each.imgURL} alt="logo"></img>
+        <img id="sourceLogo" src={each.imgURL} alt="logo"></img>
         <a href={each.link}><h3> {each.title}</h3></a>
         <span> SOURCE: {each.source}</span>
         </div>)}

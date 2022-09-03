@@ -35,7 +35,8 @@ function Box(){
                 setCoinData({...selectedCoin, coinDescription : res.data[coin].description});
                 document.getElementById("centre").style.visibility = "";  
                 console.log("unhide") ;
-            });  }
+                
+            });}
         ,[selectedCoin.currentCoin]);
 
         
@@ -49,16 +50,33 @@ function clickMe(e) {
             let rank=id.textContent.split("#")[1];
             setCoinData({...selectedCoin, currentCoin : data[rank-1].symbol, coinData : data[rank-1]});
 };  
+
+function explore(){
+    let status = document.getElementById("left").style.visibility;
+    if(status=="visible"){
+        document.getElementById("left").style.visibility = "hidden";
+        document.getElementById("explore").textContent = '->';
+    }
+    else{
+        document.getElementById("left").style.visibility = "visible";
+        document.getElementById("explore").textContent = '<-';
+    }
+    
+    console.log("should be visible now")
+
+}
         
 
     return <>
+        <button id="explore" onClick={explore}>-{">"}</button>
         <div id="left">
-            <h2 className="fixedElement"> Top 50 Cryptos</h2>
+        
+            <h2 className="fixedElement"> Top 50 Cryptos  </h2>
             {data?.map((each)=> 
             <div onClick={clickMe} key={each.market_cap_rank} className="tile">
             <div id="rank"> #{each.market_cap_rank}</div>
             <div id= "symbol">
-            <img height="40px" width="40px" src={each.image} alt="logo"></img>
+            <img id="coinLogo" src={each.image} alt="logo"></img>
             </div>
             <div id= "cryptoName"> {each.name}</div>
             <div id= "cryptoPrice"> ${each.current_price}</div>
@@ -67,12 +85,12 @@ function clickMe(e) {
             
         <div id="centre">
             <div>
-            <img style= {{display:"inline-block"}} height="50px" width="50px" src={selectedCoin.coinData.image} alt="logo"></img>
+            <img style= {{display:"inline-block"}} height="30%" width="30%" src={selectedCoin.coinData.image} alt="logo"></img>
             <h2 style= {{display:"inline-block"}}> {selectedCoin.currentCoin.toUpperCase()}</h2>
             </div>
 
             <div> {selectedCoin.coinDescription}</div>
-            <br></br>
+           
             <div> 
                 <h3 style= {{display:"inline-block"}}> {selectedCoin.coinData.name} Price : ${selectedCoin.coinData.current_price}</h3>
                 <span>
@@ -89,7 +107,7 @@ function clickMe(e) {
             <div className="grid-item, grid-item-4">  ${selectedCoin.coinData.high_24h}</div>
             </div>
             <h3> All Time High: ${selectedCoin.coinData.ath} </h3>
-            <br></br>
+            
             
             
             
