@@ -33,7 +33,7 @@ function Box(){
                 document.getElementById("centre").style.visibility = "hidden";  
                 let coin = selectedCoin.currentCoin.toUpperCase();
                 setCoinData({...selectedCoin, coinDescription : res.data[coin].description});
-                document.getElementById("centre").style.visibility = "";  
+                document.getElementById("centre").style.visibility = "visible";  
                 console.log("unhide") ;
                 
             });}
@@ -55,20 +55,17 @@ function explore(){
     let status = document.getElementById("left").style.visibility;
     if(status=="visible"){
         document.getElementById("left").style.visibility = "hidden";
-        document.getElementById("explore").textContent = '->';
+        document.getElementById("explore").src = '/angle-circle-right.svg';
     }
     else{
         document.getElementById("left").style.visibility = "visible";
-        document.getElementById("explore").textContent = '<-';
+        document.getElementById("explore").src = '/angle-circle-left.svg';
     }
-    
-    console.log("should be visible now")
-
 }
         
 
     return <>
-        <button id="explore" onClick={explore}>-{">"}</button>
+        <img id="explore" onClick={explore} src="/angle-circle-right.svg" alt="open-side-pane"/>
         <div id="left">
         
             <h2 className="fixedElement"> Top 50 Cryptos  </h2>
@@ -81,12 +78,12 @@ function explore(){
             <div id= "cryptoName"> {each.name}</div>
             <div id= "cryptoPrice"> ${each.current_price}</div>
             </div>)}
-        </div>
-            
+        </div>  
         <div id="centre">
+        
             <div>
-            <img style= {{display:"inline-block"}} height="30%" width="30%" src={selectedCoin.coinData.image} alt="logo"></img>
-            <h2 style= {{display:"inline-block"}}> {selectedCoin.currentCoin.toUpperCase()}</h2>
+            <h1> {selectedCoin.currentCoin.toUpperCase()}</h1>
+            <img id="centreLogo" src={selectedCoin.coinData.image} alt="logo"></img>
             </div>
 
             <div> {selectedCoin.coinDescription}</div>
