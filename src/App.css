@@ -215,6 +215,9 @@ progress{
 
 
 @media (max-width : 1000px){
+  .App-header{
+    height: auto;
+  }
   body{
     background-color: #61dafb;
     
