@@ -23,7 +23,7 @@ function Box(){
 
         useEffect(()=> {axios({ 
             method: "get",
-            url: `https://coinmarketcapapibyanish.herokuapp.com/testAPI`,
+            url: `https://cmcapi19-production.up.railway.app/testAPI`,
             params: {
                 'symbol': `${selectedCoin.currentCoin}`
             },
