@@ -245,7 +245,7 @@ progress {
   }
 }
 
-/// loading state CSS
+/* loading state CSS */
 
 .lds-ring {
   display: inline-block;
