@@ -5,6 +5,7 @@ const url =
   "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc";
 
 function Box() {
+  const cmcapiurl = process.env.REACT_APP_CMC_API;
   const [data, setData] = useState();
   const [selectedCoin, setCoinData] = useState({
     currentCoin: "",
@@ -26,7 +27,7 @@ function Box() {
     setLoading(true);
     axios({
       method: "get",
-      url: `https://cmcapi19-production.up.railway.app/testAPI`,
+      url: cmcapiurl,
       params: {
         symbol: `${selectedCoin.currentCoin}`,
       },
