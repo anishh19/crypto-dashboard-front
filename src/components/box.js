@@ -6,7 +6,7 @@ const url =
 
 function Box() {
   const cmcapiurl = process.env.REACT_APP_CMC_API;
-  const [data, setData] = useState();
+  const [data, setData] = useState([]);
   const [selectedCoin, setCoinData] = useState({
     currentCoin: "",
     coinDescription: "",
@@ -18,39 +18,33 @@ function Box() {
     axios.get(`${url}`).then((res) => {
       const stats = res.data.slice(0, 50);
       setData(stats);
-      setCoinData({ ...selectedCoin, currentCoin: "btc", coinData: stats[0] });
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
+    if (data.length > 0) {
+      handleCoinSelect(1);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
+
+  function handleCoinSelect(rank) {
     setLoading(true);
     axios({
       method: "get",
       url: cmcapiurl,
       params: {
-        symbol: `${selectedCoin.currentCoin}`,
+        symbol: `${data[rank - 1].symbol}`,
       },
     }).then((res) => {
-      let coin = selectedCoin.currentCoin.toUpperCase();
+      let coin = data[rank - 1].symbol.toUpperCase();
       setCoinData({
-        ...selectedCoin,
+        currentCoin: data[rank - 1].symbol,
+        coinData: data[rank - 1],
         coinDescription: res.data[coin].description,
       });
       setLoading(false);
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedCoin.currentCoin]);
-
-  function clickMe(e) {
-    let target = e.currentTarget;
-    console.log(data);
-    let id = target.querySelector("#rank");
-    let rank = id.textContent.split("#")[1];
-    setCoinData({
-      ...selectedCoin,
-      currentCoin: data[rank - 1].symbol,
-      coinData: data[rank - 1],
     });
   }
 
@@ -73,11 +67,16 @@ function Box() {
         src="/angle-circle-right.svg"
         alt="open-side-pane"
       />
-      {}
       <div id="left">
         <h2 className="fixedElement"> Top 50 Cryptos </h2>
         {data?.map((each) => (
-          <div onClick={clickMe} key={each.market_cap_rank} className="tile">
+          <div
+            onClick={() => {
+              handleCoinSelect(each.market_cap_rank);
+            }}
+            key={each.market_cap_rank}
+            className="tile"
+          >
             <div id="rank"> #{each.market_cap_rank}</div>
             <div id="symbol">
               <img id="coinLogo" src={each.image} alt="logo"></img>
@@ -89,7 +88,7 @@ function Box() {
       </div>
       {loadingState ? (
         <div id="centre">
-          <div class="lds-ring">
+          <div className="lds-ring">
             <div></div>
             <div></div>
             <div></div>
