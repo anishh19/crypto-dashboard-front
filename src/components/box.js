@@ -13,6 +13,7 @@ function Box() {
     coinData: {},
   });
   const [loadingState, setLoading] = useState(true);
+  const [iconStatus, setStatus] = useState("left");
 
   useEffect(() => {
     axios.get(`${url}`).then((res) => {
@@ -28,6 +29,18 @@ function Box() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
+
+  useEffect(() => {
+    const bar = document.querySelector(".bar");
+    const twentyFourHourHigh = selectedCoin.coinData.high_24h;
+    const twentyFourHourLow = selectedCoin.coinData.low_24h;
+    const currentPrice = selectedCoin.coinData.current_price;
+    const priceRange = twentyFourHourHigh - twentyFourHourLow;
+    const percentage = ((currentPrice - twentyFourHourLow) / priceRange) * 100;
+    setTimeout(() => {
+      bar.style.setProperty("--progress", `${percentage}%`);
+    }, 500);
+  }, [selectedCoin]);
 
   function handleCoinSelect(rank) {
     setLoading(true);
@@ -47,24 +60,27 @@ function Box() {
       setLoading(false);
     });
   }
-
-  function explore() {
-    let status = document.getElementById("left").style.visibility;
-    if (status === "visible") {
-      document.getElementById("left").style.visibility = "hidden";
-      document.getElementById("explore").src = "/angle-circle-right.svg";
-    } else {
+  useEffect(() => {
+    if (iconStatus === "left") {
       document.getElementById("left").style.visibility = "visible";
-      document.getElementById("explore").src = "/angle-circle-left.svg";
+    } else {
+      document.getElementById("left").style.visibility = "hidden";
     }
-  }
+  }, [iconStatus]);
 
   return (
     <>
       <img
         id="explore"
-        onClick={explore}
-        src="/angle-circle-right.svg"
+        onClick={() => {
+          if (iconStatus === "left") setStatus("right");
+          else setStatus("left");
+        }}
+        src={
+          iconStatus === "right"
+            ? `/angle-circle-right.svg`
+            : "/angle-circle-left.svg"
+        }
         alt="open-side-pane"
       />
       <div id="left">
@@ -121,10 +137,13 @@ function Box() {
           </div>
           <div className="grid-container">
             <div className="grid-item, grid-item-1">
-              <progress
+              <div class="progress">
+                <div class="bar"></div>
+              </div>
+              {/* <progress
                 value={selectedCoin.coinData.current_price}
                 max={selectedCoin.coinData.ath}
-              />
+              /> */}
             </div>
             <div className="grid-item, grid-item-2">
               ${selectedCoin.coinData.low_24h}
