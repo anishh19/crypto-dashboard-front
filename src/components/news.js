@@ -18,7 +18,14 @@ function News() {
         <div className="fixedElement"> Top News</div>
         {articles?.map((each) => (
           <div key={each.link} className="newsTile">
-            <img id="sourceLogo" src={each.imgURL} alt="logo"></img>
+            <img
+              id="sourceLogo"
+              onError={(event) => {
+                event.currentTarget.src = "/backup-image.jpeg";
+              }}
+              src={each.imgURL}
+              alt="News Source Logo"
+            ></img>
             <a href={each.link}>
               <h3> {each.title}</h3>
             </a>
