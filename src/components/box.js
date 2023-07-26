@@ -20,6 +20,7 @@ function Box() {
     axios.get(`${url}`).then((res) => {
       const stats = res.data.slice(0, 50);
       setData(stats);
+      console.log(stats);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -41,6 +42,7 @@ function Box() {
     setTimeout(() => {
       setPercentage(percentage);
     }, 500);
+    console.log(selectedCoin);
   }, [selectedCoin]);
 
   function handleCoinSelect(rank) {
@@ -95,6 +97,17 @@ function Box() {
             }}
             key={each.market_cap_rank}
             className="tile"
+            id={
+              selectedCoin.currentCoin === each.symbol
+                ? "yep"
+                : `Selected: ${selectedCoin.currentCoin}, This Div: ${each.name}`
+            }
+            style={{
+              border:
+                selectedCoin.currentCoin === each.symbol
+                  ? "8px solid  #1a1536"
+                  : null,
+            }}
           >
             <div id="rank"> #{each.market_cap_rank}</div>
             <div id="symbol">

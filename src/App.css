@@ -156,9 +156,8 @@ progress {
   height: 300px;
   display: flex;
   flex-direction: row;
-  margin-top: 0.3em;
   padding: 4px 0px;
-
+  cursor: pointer;
   border-radius: 4px;
   color: #1a1536;
   background-image: linear-gradient(180deg, #0dcdc0, #016861);
