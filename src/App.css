@@ -156,12 +156,13 @@ progress {
   height: 300px;
   display: flex;
   flex-direction: row;
-  padding: 4px 0px;
+  padding: 2px 0px;
   cursor: pointer;
   border-radius: 4px;
   color: #1a1536;
   background-image: linear-gradient(180deg, #0dcdc0, #016861);
   box-sizing: border-box;
+  font-size: 0.8em;
 }
 
 #toLeft {
@@ -212,8 +213,13 @@ progress {
     transform: rotate(360deg);
   }
 }
+@media (max-width: 800px) {
+  #centre {
+    font-size: 0.8em;
+  }
+}
 
-@media (max-width: 1000px) {
+@media (max-width: 700px) {
   .App-header {
     height: auto;
   }
@@ -228,7 +234,7 @@ progress {
   #left {
     position: absolute;
     left: 0px;
-    width: 80vw;
+    width: 60vw;
     background-color: #1a1536;
     height: 80vh;
     visibility: hidden;
@@ -237,6 +243,7 @@ progress {
   #centre {
     width: 95vw;
     height: 80vh;
+    font-size: 1em;
   }
 
   #right {
