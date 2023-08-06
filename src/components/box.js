@@ -7,7 +7,6 @@ const url =
 
 function Box() {
   const size = useWindowSize();
-  console.log(size);
   const cmcapiurl = process.env.REACT_APP_CMC_API;
   const [data, setData] = useState([]);
   const [selectedCoin, setCoinData] = useState({
@@ -16,7 +15,7 @@ function Box() {
     coinData: {},
   });
   const [state, setState] = useState("initial");
-  //if size is small set to right
+  //if screen size is small set to right
   const [iconStatus, setStatus] = useState(size.width < 700 ? "right" : "left");
   const [rangePercentage, setPercentage] = useState(0);
 
@@ -24,9 +23,7 @@ function Box() {
     axios.get(`${url}`).then((res) => {
       const stats = res.data.slice(0, 50);
       setData(stats);
-      console.log(stats);
     });
-    console.log("status", iconStatus);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -51,7 +48,6 @@ function Box() {
     setTimeout(() => {
       setPercentage(percentage);
     }, 500);
-    console.log(selectedCoin);
   }, [selectedCoin]);
 
   function handleCoinSelect(rank) {
